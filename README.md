@@ -14,7 +14,7 @@
    * Out-of-scope use cases: Real-world mortgage decisioning without regulatory compliance checks or human oversight.
 
 ## Training Data
-   * Data Dictionary
+    Data Dictionary
      |       Name       | Modeling Role | Measurement Level |                        Description                         |
      |:---------------:|:-------------:|:-----------------:|:---------------------------------------------------------:|
      |     term_360     |     input     |        int        | Binary indicator if loan term is 360 months |
@@ -32,8 +32,8 @@
    * Source of training data: Processed HMDA dataset (2023)
    * How training data was divided into training and validation data: 50% training, 25% validation, 25% test
    * Number of rows in training and validation data:
-   * Training rows: 112253
-   * Validation rows: 48085
+     Training rows: 112253
+     Validation rows: 48085
 
 ## Test Data
    * Source of test data: Processed HMDA dataset (2023)
@@ -53,13 +53,13 @@
      | Metric    | Train AUC | Validation AUC |
      |:--------:|:---------:|:--------------:|
      | AUC Score | 0.7802    | 0.7739         |
-   * Table 1. AUC values across data partitions.
+    Table 1. AUC values across data partitions.
      | Group               | Validation AIR |
      |:------------------:|:--------------:|
      | Black vs. White     | 0.787          |
      | Asian vs. White     | 1.157          |
      | Female vs. Male     | 0.958          |
-   * Table 2. Validation AIR values for race and sex groups.
+    Table 2. Validation AIR values for race and sex groups.
  
 
 #### Figures 
