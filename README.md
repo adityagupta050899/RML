@@ -15,20 +15,19 @@
 
 ## Training Data
    ###### Data Dictionary
-
-     |       Name       | Modeling Role | Measurement Level |                        Description                         |
-     |:---------------:|:-------------:|:-----------------:|:---------------------------------------------------------:|
-     |     term_360     |     input     |        int        | Binary indicator if loan term is 360 months |
-     |    conforming    |     input     |        int        | Flag for conforming loan status |
-     | debt_to_income_ratio_missing | input | int | Flag if DTI was missing |
-     | loan_amount_std  |     input     |       float       | Standardized loan amount       |
-     | loan_to_value_ratio_std |  input  |      float       | Standardized LTV ratio      |
-     | no_intro_rate_period_std | input | float | Standardized flag for no intro rate     |
-     | intro_rate_period_std | input | float | Standardized intro rate period    |
-     | property_value_std |  input      |      float        | Standardized property value |
-     |   income_std     |     input     |       float       | Standardized borrower income   |
-     | debt_to_income_ratio_std | input | float | Standardized DTI ratio |
-     |   high_priced    |    target     |       float       | Label: 1 = high-priced, 0 = not |
+|       Name       | Modeling Role | Measurement Level |                        Description                         |
+|:---------------:|:-------------:|:-----------------:|:---------------------------------------------------------:|
+|     term_360     |     input     |        int        | Binary indicator if loan term is 360 months |
+|    conforming    |     input     |        int        | Flag for conforming loan status |
+| debt_to_income_ratio_missing | input | int | Flag if DTI was missing |
+| loan_amount_std  |     input     |       float       | Standardized loan amount       |
+| loan_to_value_ratio_std |  input  |      float       | Standardized LTV ratio      |
+| no_intro_rate_period_std | input | float | Standardized flag for no intro rate     |
+| intro_rate_period_std | input | float | Standardized intro rate period    |
+| property_value_std |  input      |      float        | Standardized property value |
+|   income_std     |     input     |       float       | Standardized borrower income   |
+| debt_to_income_ratio_std | input | float | Standardized DTI ratio |
+|   high_priced    |    target     |       float       | Label: 1 = high-priced, 0 = not |
 
    * Source of training data: Processed HMDA dataset (2023)
    * How training data was divided into training and validation data: 50% training, 25% validation, 25% test
