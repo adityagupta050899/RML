@@ -2,7 +2,7 @@
 
 ### Basic Information
 
-1. Person or organization developing model: Patrick Hall, jphall@gwu.edu and Aditya Gupta (aditya.gupta@gwmail.gwu.edu)
+1. Person or organization developing model: Aditya Gupta (aditya.gupta@gwmail.gwu.edu)
  2. Model date: August, 2021-2025
  3. Model version: 2.0
  4. License: MIT
@@ -49,20 +49,21 @@
    * Hyperparameters or other settings of your model : ['loan_amount_std', 'no_intro_rate_period_std', 'term_360', 'income_std', 'debt_to_income_ratio_missing', 'intro_rate_period_std', 'property_value_std']
 
 ## Quantitative Analysis
-   * Models were assessed primarily with AUC and AIR. See details below:
-     | Metric    | Train AUC | Validation AUC |
-     |:--------:|:---------:|:--------------:|
-     | AUC Score | 0.7802    | 0.7739         |
+Models were assessed primarily with AUC and AIR. See details below:
+
+| Metric    | Train AUC | Validation AUC |
+|:--------:|:---------:|:--------------:|
+| AUC Score | 0.7802    | 0.7739         |
     
-   ###### Table 1. AUC values across data partitions.
+###### Table 1. AUC values across data partitions.
     
-     | Group               | Validation AIR |
-     |:------------------:|:--------------:|
-     | Black vs. White     | 0.787          |
-     | Asian vs. White     | 1.157          |
-     | Female vs. Male     | 0.958          |
+| Group               | Validation AIR |
+|:------------------:|:--------------:|
+| Black vs. White     | 0.787          |
+| Asian vs. White     | 1.157          |
+| Female vs. Male     | 0.958          |
     
-   ###### Table 2. Validation AIR values for race and sex groups.
+###### Table 2. Validation AIR values for race and sex groups.
  
 
 #### Figures 
