@@ -14,7 +14,7 @@
    * Out-of-scope use cases: Real-world mortgage decisioning without regulatory compliance checks or human oversight.
 
 ## Training Data
-    Data Dictionary
+   ###### Data Dictionary
 
      |       Name       | Modeling Role | Measurement Level |                        Description                         |
      |:---------------:|:-------------:|:-----------------:|:---------------------------------------------------------:|
@@ -55,7 +55,7 @@
      |:--------:|:---------:|:--------------:|
      | AUC Score | 0.7802    | 0.7739         |
     
-    Table 1. AUC values across data partitions.
+   # Table 1. AUC values across data partitions.
     
      | Group               | Validation AIR |
      |:------------------:|:--------------:|
