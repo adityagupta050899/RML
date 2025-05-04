@@ -15,6 +15,7 @@
 
 ## Training Data
     Data Dictionary
+
      |       Name       | Modeling Role | Measurement Level |                        Description                         |
      |:---------------:|:-------------:|:-----------------:|:---------------------------------------------------------:|
      |     term_360     |     input     |        int        | Binary indicator if loan term is 360 months |
@@ -53,12 +54,15 @@
      | Metric    | Train AUC | Validation AUC |
      |:--------:|:---------:|:--------------:|
      | AUC Score | 0.7802    | 0.7739         |
+    
     Table 1. AUC values across data partitions.
+    
      | Group               | Validation AIR |
      |:------------------:|:--------------:|
      | Black vs. White     | 0.787          |
      | Asian vs. White     | 1.157          |
      | Female vs. Male     | 0.958          |
+    
     Table 2. Validation AIR values for race and sex groups.
  
 
