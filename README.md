@@ -54,7 +54,7 @@
      |:--------:|:---------:|:--------------:|
      | AUC Score | 0.7802    | 0.7739         |
     
-   # Table 1. AUC values across data partitions.
+   ###### Table 1. AUC values across data partitions.
     
      | Group               | Validation AIR |
      |:------------------:|:--------------:|
@@ -62,7 +62,7 @@
      | Asian vs. White     | 1.157          |
      | Female vs. Male     | 0.958          |
     
-    Table 2. Validation AIR values for race and sex groups.
+   ###### Table 2. Validation AIR values for race and sex groups.
  
 
 #### Figures 
