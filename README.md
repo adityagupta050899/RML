@@ -66,7 +66,7 @@ Models were assessed primarily with AUC and AIR. See details below:
 ###### Table 2. Validation AIR values for race and sex groups.
  
 
-#### Figures 
+## Figures 
 
 * Assignment 1
 
