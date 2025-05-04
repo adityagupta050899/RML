@@ -70,55 +70,55 @@ Models were assessed primarily with AUC and AIR. See details below:
 
 * Assignment 1
 
+![image](https://github.com/user-attachments/assets/3bde93c3-9e85-4ba3-9d58-afdf3ff6768a)
 
 Figure 1. Histograms data exploration.
 
-
+![image](https://github.com/user-attachments/assets/5509c352-3f74-4185-851f-3f241cd33f8b)
 
 Figure 2. Heatmaps correlations.
 
 * Assignment 2
 
-
+![image](https://github.com/user-attachments/assets/52804666-89ee-4ab0-9172-75f08d00f5f3)
 
 Figure 3. Global feature importance.
 
-
+![image](https://github.com/user-attachments/assets/491d1399-613e-4da3-a9f1-a5a56ec8a6c5)
 
 Figure 4. Local feature importance
 
-
+![image](https://github.com/user-attachments/assets/bb860789-ef80-4205-806b-b0761212c2d6)
 
 Figure 5. Partial dependence feature
 
 * Assignment 3
 
-
+![image](https://github.com/user-attachments/assets/1d3c8db5-3369-4cb5-bd2e-1467fd8e9ce6)
 
 Figure 6. AIR V/S AUC EBM
 
 * Assignment 4
 
-
+![image](https://github.com/user-attachments/assets/6d3b72fc-93af-4f99-993e-0434f092f6fd)
 
 Figure 7. Simulated data
 
-
-
+![image](https://github.com/user-attachments/assets/ca7a066e-48ea-41bf-8e6b-397fc4b3153d)
 
 Figure 8. Stolen model
 
-
+![image](https://github.com/user-attachments/assets/561077de-83e4-4331-921e-79abe7c0fe37)
 
 Figure 9. Distributed random forest
 
 * Assignment 5
 
-
+![image](https://github.com/user-attachments/assets/95cfa5cc-cbb2-4cd2-b068-659d98dfe640)
 
 Figure 10. Simulate recession conditions in validation data
 
-
+![image](https://github.com/user-attachments/assets/71eb3c14-bbb0-40aa-ad43-e397ac389fc8)
 
 Figure 11. Global Logloss Residuals 
 
