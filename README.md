@@ -1,89 +1,138 @@
-# Credit Line Increase Model Card
+# RML Assignments Overview
 
 ### Basic Information
 
-* **Person or organization developing model**: Patrick Hall, `jphall@gwu.edu`
-* **Model date**: August, 2021
-* **Model version**: 1.0
-* **License**: MIT
-* **Model implementation code**: [DNSC_6301_Example_Project.ipynb](https://github.com/jphall663/GWU_DNSC_6301_project/blob/main/DNSC_6301_Example_Project.ipynb)
+1. Person or organization developing model: Patrick Hall, jphall@gwu.edu and Aditya Gupta (aditya.gupta@gwmail.gwu.edu)
+ 2. Model date: August, 2021-2025
+ 3. Model version: 2.0
+ 4. License: MIT
+ 5. Model implementation code: [DNSC_6301_Example_Project.ipynb](https://github.com/jphall663/GWU_DNSC_6301_project/blob/main/DNSC_6301_Example_Project.ipynb) 
 
-### Intended Use
-* **Primary intended uses**: This model is an *example* probability of default classifier, with an *example* use case for determining eligibility for a credit line increase.
-* **Primary intended users**: Students in GWU DNSC 6301 bootcamp.
-* **Out-of-scope use cases**: Any use beyond an educational example is out-of-scope.
+## Intended Use
+   * Primary intended uses: Educational project to demonstrate interpretable and fair ML modeling on HMDA data
+   * Primary intended users: Students, researchers, and practitioners interested in responsible machine learning.
+   * Out-of-scope use cases: Real-world mortgage decisioning without regulatory compliance checks or human oversight.
 
-### Training Data
+## Training Data
+   * Data Dictionary
+     |       Name       | Modeling Role | Measurement Level |                        Description                         |
+     |:---------------:|:-------------:|:-----------------:|:---------------------------------------------------------:|
+     |     term_360     |     input     |        int        | Binary indicator if loan term is 360 months |
+     |    conforming    |     input     |        int        | Flag for conforming loan status |
+     | debt_to_income_ratio_missing | input | int | Flag if DTI was missing |
+     | loan_amount_std  |     input     |       float       | Standardized loan amount       |
+     | loan_to_value_ratio_std |  input  |      float       | Standardized LTV ratio      |
+     | no_intro_rate_period_std | input | float | Standardized flag for no intro rate     |
+     | intro_rate_period_std | input | float | Standardized intro rate period    |
+     | property_value_std |  input      |      float        | Standardized property value |
+     |   income_std     |     input     |       float       | Standardized borrower income   |
+     | debt_to_income_ratio_std | input | float | Standardized DTI ratio |
+     |   high_priced    |    target     |       float       | Label: 1 = high-priced, 0 = not |
 
-* Data dictionary: 
+   * Source of training data: Processed HMDA dataset (2023)
+   * How training data was divided into training and validation data: 50% training, 25% validation, 25% test
+   * Number of rows in training and validation data:
+   * Training rows: 112253
+   * Validation rows: 48085
 
-| Name | Modeling Role | Measurement Level| Description|
-| ---- | ------------- | ---------------- | ---------- |
-|**ID**| ID | int | unique row indentifier |
-| **LIMIT_BAL** | input | float | amount of previously awarded credit |
-| **SEX** | demographic information | int | 1 = male; 2 = female
-| **RACE** | demographic information | int | 1 = hispanic; 2 = black; 3 = white; 4 = asian |
-| **EDUCATION** | demographic information | int | 1 = graduate school; 2 = university; 3 = high school; 4 = others |
-| **MARRIAGE** | demographic information | int | 1 = married; 2 = single; 3 = others |
-| **AGE** | demographic information | int | age in years |
-| **PAY_0, PAY_2 - PAY_6** | inputs | int | history of past payment; PAY_0 = the repayment status in September, 2005; PAY_2 = the repayment status in August, 2005; ...; PAY_6 = the repayment status in April, 2005. The measurement scale for the repayment status is: -1 = pay duly; 1 = payment delay for one month; 2 = payment delay for two months; ...; 8 = payment delay for eight months; 9 = payment delay for nine months and above |
-| **BILL_AMT1 - BILL_AMT6** | inputs | float | amount of bill statement; BILL_AMNT1 = amount of bill statement in September, 2005; BILL_AMT2 = amount of bill statement in August, 2005; ...; BILL_AMT6 = amount of bill statement in April, 2005 |
-| **PAY_AMT1 - PAY_AMT6** | inputs | float | amount of previous payment; PAY_AMT1 = amount paid in September, 2005; PAY_AMT2 = amount paid in August, 2005; ...; PAY_AMT6 = amount paid in April, 2005 |
-| **DELINQ_NEXT**| target | int | whether a customer's next payment is delinquent (late), 1 = late; 0 = on-time |
+## Test Data
+   * Source of test data: Processed HMDA dataset (2023)
+   * Number of rows in test data: 19831
+   * State any differences in columns between training and test data: None
 
-* **Source of training data**: GWU Blackboard, email `jphall@gwu.edu` for more information
-* **How training data was divided into training and validation data**: 50% training, 25% validation, 25% test
-* **Number of rows in training and validation data**:
-  * Training rows: 15,000
-  * Validation rows: 7,500
+## Model details
+   * Columns used as inputs in the final model: 'TERM_360', 'CONFORMING', 'DEBT_TO_INCOME_RATIO_MISSING', 'LOAN_AMOUNT_STD', 'LOAN_TO_VALUE_RATIO_STD', 'NO_INTRO_RATE_PERIOD_STD', 'INTRO_RATE_PERIOD_STD', 'PROPERTY_VALUE_STD', 'INCOME_STD', 'DEBT_TO_INCOME_RATIO_STD'
+   * Column(s) used as target(s) in the final model: 'HIGH_PRICED'
+   * Type of model: Explainable Boosting Machine (EBM)
+   * Software used to implement the model: Python, scikit-learn
+   * Version of the modeling software: 0.22.2.post1
+   * Hyperparameters or other settings of your model : ['loan_amount_std', 'no_intro_rate_period_std', 'term_360', 'income_std', 'debt_to_income_ratio_missing', 'intro_rate_period_std', 'property_value_std']
 
-### Test Data
-* **Source of test data**: GWU Blackboard, email `jphall@gwu.edu` for more information
-* **Number of rows in test data**: 7,500
-* **State any differences in columns between training and test data**: None
+## Quantitative Analysis
+   * Models were assessed primarily with AUC and AIR. See details below:
+     | Metric    | Train AUC | Validation AUC |
+     |:--------:|:---------:|:--------------:|
+     | AUC Score | 0.7802    | 0.7739         |
+   * Table 1. AUC values across data partitions.
+     | Group               | Validation AIR |
+     |:------------------:|:--------------:|
+     | Black vs. White     | 0.787          |
+     | Asian vs. White     | 1.157          |
+     | Female vs. Male     | 0.958          |
+   * Table 2. Validation AIR values for race and sex groups.
+ 
 
-### Model details
-* **Columns used as inputs in the final model**: 'LIMIT_BAL',
-       'PAY_0', 'PAY_2', 'PAY_3', 'PAY_4', 'PAY_5', 'PAY_6', 'BILL_AMT1',
-       'BILL_AMT2', 'BILL_AMT3', 'BILL_AMT4', 'BILL_AMT5', 'BILL_AMT6',
-       'PAY_AMT1', 'PAY_AMT2', 'PAY_AMT3', 'PAY_AMT4', 'PAY_AMT5', 'PAY_AMT6'
-* **Column(s) used as target(s) in the final model**: 'DELINQ_NEXT'
-* **Type of model**: Decision Tree 
-* **Software used to implement the model**: Python, scikit-learn
-* **Version of the modeling software**: 0.22.2.post1
-* **Hyperparameters or other settings of your model**: 
-```
-DecisionTreeClassifier(ccp_alpha=0.0, class_weight=None, criterion='gini',
-                       max_depth=6, max_features=None, max_leaf_nodes=None,
-                       min_impurity_decrease=0.0, min_impurity_split=None,
-                       min_samples_leaf=1, min_samples_split=2,
-                       min_weight_fraction_leaf=0.0, presort='deprecated',
-                       random_state=12345, splitter='best')
-```
-### Quantitative Analysis
+#### Figures 
 
-* Models were assessed primarily with AUC and AIR. See details below:
+* Assignment 1
 
-| Train AUC | Validation AUC | Test AUC |
-| ------ | ------- | -------- |
-| 0.3456 | 0.7891  | 0.7687* |
 
-Table 1. AUC values across data partitions. 
+Figure 1. Histograms data exploration.
 
-| Group | Validation AIR |
-|-------|-----|
-| Black vs. White | 0.8345 |
-| Hispanic vs. White | 0.8765 |
-| Asian vs. White | 1.098 |
-| Female vs. Male | 1.245 |
 
-Table 2. Validation AIR values for race and sex groups. 
 
-(**HINT**: Test AUC taken from https://github.com/jphall663/GWU_rml/blob/master/assignments/model_eval_2023_06_21_12_52_47.csv)
+Figure 2. Heatmaps correlations.
 
-#### Correlation Heatmap
+* Assignment 2
 
-![Correlation Heatmap](download.png)
 
-Figure 1. Correlation heatmap for input features. 
 
+Figure 3. Global feature importance.
+
+
+
+Figure 4. Local feature importance
+
+
+
+Figure 5. Partial dependence feature
+
+* Assignment 3
+
+
+
+Figure 6. AIR V/S AUC EBM
+
+* Assignment 4
+
+
+
+Figure 7. Simulated data
+
+
+
+
+Figure 8. Stolen model
+
+
+
+Figure 9. Distributed random forest
+
+* Assignment 5
+
+
+
+Figure 10. Simulate recession conditions in validation data
+
+
+
+Figure 11. Global Logloss Residuals 
+
+## Ethical Considerations
+
+### Potential Negative Impacts:
+* The remediated EBM model may still encode indirect bias despite AIR parity improvements.
+* Overreliance on fairness metrics like AIR can mask other disparities (e.g., precision, recall across groups).
+* Software issues (e.g., float precision errors or binning instability) could lead to inconsistent scoring.
+* Real-world risk: borrowers may be unfairly classified as high-risk during economic downturns, affecting credit access.
+
+### Potential Uncertainties:
+
+* Shifts in borrower behavior or policy changes (e.g., interest rate ceilings) could affect generalizability.
+* Unknown interaction effects between features might behave unexpectedly under real-time deployment conditions.
+* Model drift or adversarial manipulation could arise if integrated into production systems without monitoring.
+
+### Unexpected Results:
+
+* Remediated EBM showed slightly lower AUC but improved AIR, highlighting a tradeoff between accuracy and fairness.
+* Feature no_intro_rate_period_std had unexpectedly high influence in certain EBM iterations.
