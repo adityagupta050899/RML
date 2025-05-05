@@ -2,16 +2,38 @@
 
 ### Basic Information
 
-1. Person or organization developing model: Aditya Gupta (aditya.gupta@gwmail.gwu.edu)
+1. Person or organization developing model: Patrick Hall (jphall@gwu.edu), Aditya Gupta (aditya.gupta@gwmail.gwu.edu)
  2. Model date: August, 2021-2025
- 3. Model version: 2.0
- 4. License: MIT
- 5. Model implementation code: [DNSC_6301_Example_Project.ipynb](https://github.com/jphall663/GWU_DNSC_6301_project/blob/main/DNSC_6301_Example_Project.ipynb) 
+ 3. Model version: 1.0
+ 4. License:  Apache License, Version 2.0
+ 5. Model implementation code: [Group_9_Model_Used.ipynb](https://github.com/adityagupta050899/RML/blob/9eb41877f070398e2e717baa029ac9b378968cf7/Templates/assign_5_template.ipynb) 
 
 ## Intended Use
-   * Primary intended uses: Educational project to demonstrate interpretable and fair ML modeling on HMDA data
-   * Primary intended users: Students, researchers, and practitioners interested in responsible machine learning.
-   * Out-of-scope use cases: Real-world mortgage decisioning without regulatory compliance checks or human oversight.
+
+### Business Value
+My best remediated model helps mortgage lenders flag loans likely to be classified as *high-priced* (APR ≥ 1.5%) while minimizing demographic bias across race, gender, and age categories. Built on real HMDA data, the model provides actionable insights for identifying inequities in lending decisions and serves as a replicable, auditable framework for responsible AI and compliance reporting.
+
+### How It Is Designed to Be Used
+The model is intended to be used **offline** in batch settings for:
+- Predicting high-priced mortgage risk from applicant features (Assignment 1)
+- Auditing fairness through AIR comparisons and remedial actions (Assignment 3)
+- Exploring global and local feature contributions (Assignment 2)
+- Testing resilience through adversarial examples and red teaming (Assignment 4)
+- Evaluating robustness through recession scenarios and error profiling (Assignment 5)
+
+### Intended Users
+- Mortgage risk analysts and compliance officers
+- Fair lending auditors and regulatory reporting teams
+- Students and researchers focused on interpretable machine learning
+
+### Additional Usage Limitations
+This model is **not intended** for use in production systems or high-stakes decisions such as:
+- Final loan approvals
+- Insurance assessments
+- Employment screening
+- Criminal justice predictions
+
+Deployment in such contexts would require extensive retraining, domain validation, and regulatory oversight to ensure fitness for purpose.
 
 ## Training Data
    ###### Data Dictionary
@@ -30,10 +52,19 @@
 |   high_priced    |    target     |       float       | Label: 1 = high-priced, 0 = not |
 
    * Source of training data: Processed HMDA dataset (2023)
-   * How training data was divided into training and validation data: 50% training, 25% validation, 25% test
+   * How training data was divided into training and validation data: 70% training, 30% validation
+   
+  ```python
+   np.random.seed(SEED) # preserve exact reproducibility for this cell
+split_ratio = 0.7 # 70%/30% train/test split
+split = np.random.rand(len(data)) < split_ratio
+train = data[split]
+valid = data[~split]
+
    * Number of rows in training and validation data:
-     Training rows: 112253
-     Validation rows: 48085
+      * Training rows  = **112,253**  
+      * Validation rows = **48,085**
+
 
 ## Test Data
    * Source of test data: Processed HMDA dataset (2023)
@@ -65,9 +96,8 @@
 
 #### Assignment 3: Fairness Testing and Remediation (AIR)
    * Objective: Test models for discrimination using AIR; improve without reducing AIR below 0.8
-   * Initial EBM AIRs: Black vs White - 0.843 | Asian vs White - 1.109 | Female vs Male - 0.999
-   * Remediated EBM AIRs: Black vs White - 0.943 | Asian vs White - 1.159 | Female vs Male - 1.021
-   * Validation AUC: 0.8250 (no performance drop from original EBM)
+   * Adverse impact ratio for: Black vs White - 0.802 | Asian vs White - 1.158 | Female vs Male - 0.957
+   * Validation AUC: 0.7767 (no performance drop from original EBM)
    * Observations: Grid search helped improve fairness while retaining model performance
 
 #### Assignment 4: Red Teaming and Adversarial Testing
