@@ -70,7 +70,7 @@ Deployment in such contexts would require extensive retraining, domain validatio
    * Software used to implement the model: Python, scikit-learn
    * Version of the modeling software: 0.22.2.post1
    * Hyper‑parameters / settings  
-
+<pre>
   ```python
   rem_params = {
       'max_bins': 1024,
@@ -81,6 +81,7 @@ Deployment in such contexts would require extensive retraining, domain validatio
       'early_stopping_rounds': 100,
       'random_state': 12345
   }
+</pre>
 
 ## Assignment‑wise Results Summary
 
