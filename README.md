@@ -121,7 +121,7 @@ Deployment in such contexts would require extensive retraining, domain validatio
 ## Quantitative Analysis
 Models were assessed primarily with AUC and AIR. See details below:
 
-| Metric    | Train AUC | Validation AUC |
+| Metric    | Test AUC | Validation AUC |
 |:--------:|:---------:|:--------------:|
 | AUC Score | 0.7802    | 0.7739         |
     
@@ -192,21 +192,29 @@ Figure 10. Simulate recession conditions in validation data
 
 Figure 11. Global Logloss Residuals 
 
-## Ethical Considerations
+## Alternative models considered
 
-### Potential Negative Impacts:
-* The remediated EBM model may still encode indirect bias despite AIR parity improvements.
-* Overreliance on fairness metrics like AIR can mask other disparities (e.g., precision, recall across groups).
-* Software issues (e.g., float precision errors or binning instability) could lead to inconsistent scoring.
-* Real-world risk: borrowers may be unfairly classified as high-risk during economic downturns, affecting credit access.
+* **Elastic Net GLM**: We implemented a penalized logistic regression using H2O’s GLM function, which automatically tuned the alpha parameter across a grid of values via 10-fold cross-validation and lambda search. The model used the same set of standardized features as our final EBM and was trained on H2OFrame objects with seed-controlled reproducibility. This approach yielded a validation AUC of 0.7538, offering strong interpretability but limited capacity to capture nonlinear effects. Its transparent coefficients and standardized pipeline made it a solid baseline.
 
-### Potential Uncertainties:
+* **Monotonic XGBoost**: We applied a custom monotonic XGBoost grid search using a manually defined monotonicity constraint vector and extensive hyperparameter tuning over 50 randomized configurations. The implementation employed XGBoost v1.7 and evaluated models on AUC using early stopping. This model reached a validation AUC of 0.7916, outperforming the GLM in terms of discrimination. However, due to its complexity and lower interpretability, it was not chosen as the final model. Its strength lay in its flexibility, but it lacked the auditability of EBM.
 
-* Shifts in borrower behavior or policy changes (e.g., interest rate ceilings) could affect generalizability.
-* Unknown interaction effects between features might behave unexpectedly under real-time deployment conditions.
-* Model drift or adversarial manipulation could arise if integrated into production systems without monitoring.
+### Ethical Considerations
 
-### Unexpected Results:
+**Potential Negative Impacts:**
+- **Math/Software Precision:** The EBM’s histogram binning (max_bins = 256) may cause rounding inconsistencies near the decision threshold (e.g., 0.22 cutoff), affecting classification outcomes.
+- **Random Grid Sensitivity:** The fairness grid search in Assignment 3 produced models with noticeable AIR variation across different random seeds.
+- **Software Dependency Drift:** Future changes to the `interpret` or `xgboost` packages may alter default behavior, requiring careful version control and regression testing.
+- **Security Exposure:** The red-teaming exercise (Assignment 4) demonstrated that a simple surrogate model could mimic the remediated EBM and be exploited via crafted inputs, enabling adversarial steering.
+- **Fairness Scope:** While AIR parity was achieved for race (Black/Asian/White) and gender (Female/Male), we did not audit fairness across other dimensions like age or region.
+- **Real-World Risks:** In stress testing (Assignment 5), the AUC dropped from 0.72 to ~0.59 under mild recession simulation. This degradation may result in unjustified denials or high-cost loans to sensitive populations.
 
-* Remediated EBM showed slightly lower AUC but improved AIR, highlighting a tradeoff between accuracy and fairness.
-* Feature no_intro_rate_period_std had unexpectedly high influence in certain EBM iterations.
+**Potential Uncertainties:**
+- **Distribution Shift:** Changes in lending practices or economic shocks could push features like `income_std` or `property_value_std` beyond training bounds, degrading model reliability.
+- **Model Monitoring:** No continuous monitoring or drift detection has been implemented; unexpected feature shifts could go unnoticed.
+- **Metric Sufficiency:** AIR compliance does not guarantee equal precision or recall across groups. Disparate impact may persist despite parity on one metric.
+
+**Unexpected Results During Training:**
+- Raising the decision threshold from 0.19 to 0.22 improved Black vs. White AIR from 0.768 to 0.824 with negligible AUC loss (<0.3pp).
+- Removing extreme log-loss outliers improved validation AUC from 0.7202 to 0.7243 in Assignment 5.
+- The feature `no_intro_rate_period_std` emerged with disproportionately high importance in some EBM runs, potentially acting as a proxy variable.
+- A mild simulated recession caused a steep AUC decline to ~0.592, indicating fragility to macroeconomic shifts.
