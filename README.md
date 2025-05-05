@@ -53,33 +53,36 @@ Deployment in such contexts would require extensive retraining, domain validatio
 
    * Source of training data: Processed HMDA dataset (2023)
    * How training data was divided into training and validation data: 70% training, 30% validation
-
-  ```python
-  np.random.seed(SEED)  # preserve exact reproducibility for this cell
-  split_ratio = 0.7  # 70%/30% train/test split
-  split = np.random.rand(len(data)) < split_ratio
-  train = data[split]
-  valid = data[~split]
-
-* **Number of rows in training and validation data:**  
-  * Training rows  = **112,253**  
-  * Validation rows = **48,085**
+   * **Number of rows in training and validation data:**  
+     * Training rows  = **112,253**  
+     * Validation rows = **48,085**
 
 
 ## Test Data
    * Source of test data: Processed HMDA dataset (2023)
-   * Number of rows in test data: 19831
-   * State any differences in columns between training and test data: None
+   * Number of rows in test data: 19,831
+   * State any differences in columns between training and test data: The test file has the identical column schema as the training set (all feature columns present); the only distinction is that the target label high_priced is withheld.
 
 ## Model details
-   * Columns used as inputs in the final model: 'TERM_360', 'CONFORMING', 'DEBT_TO_INCOME_RATIO_MISSING', 'LOAN_AMOUNT_STD', 'LOAN_TO_VALUE_RATIO_STD', 'NO_INTRO_RATE_PERIOD_STD', 'INTRO_RATE_PERIOD_STD', 'PROPERTY_VALUE_STD', 'INCOME_STD', 'DEBT_TO_INCOME_RATIO_STD'
+   * Columns used as inputs in the final model: 'debt_to_income_ratio_missing', 'debt_to_income_ratio_std', 'property_value_std', 'term_360', 'no_intro_rate_period_std'
    * Column(s) used as target(s) in the final model: 'HIGH_PRICED'
    * Type of model: Explainable Boosting Machine (EBM)
    * Software used to implement the model: Python, scikit-learn
    * Version of the modeling software: 0.22.2.post1
-   * Hyperparameters or other settings of your model : ['loan_amount_std', 'no_intro_rate_period_std', 'term_360', 'income_std', 'debt_to_income_ratio_missing', 'intro_rate_period_std', 'property_value_std']
+   * Hyper‑parameters / settings  
 
-## Assignment-wise Results Summary
+  ```python
+  rem_params = {
+      'max_bins': 1024,
+      'interactions': 10,
+      'outer_bags': 16,
+      'learning_rate': 0.05,
+      'n_jobs': 4,
+      'early_stopping_rounds': 100,
+      'random_state': 12345
+  }
+
+## Assignment‑wise Results Summary
 
 #### Assignment 1: Model Training on Explainable Models
    * Objective: Train and compare GLM, Monotonic XGBoost, and EBM models on HMDA data
