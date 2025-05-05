@@ -53,17 +53,17 @@ Deployment in such contexts would require extensive retraining, domain validatio
 
    * Source of training data: Processed HMDA dataset (2023)
    * How training data was divided into training and validation data: 70% training, 30% validation
-   
-  ```python
-   np.random.seed(SEED) # preserve exact reproducibility for this cell
-split_ratio = 0.7 # 70%/30% train/test split
-split = np.random.rand(len(data)) < split_ratio
-train = data[split]
-valid = data[~split]
 
-   * Number of rows in training and validation data:
-      * Training rows  = **112,253**  
-      * Validation rows = **48,085**
+  ```python
+  np.random.seed(SEED)  # preserve exact reproducibility for this cell
+  split_ratio = 0.7  # 70%/30% train/test split
+  split = np.random.rand(len(data)) < split_ratio
+  train = data[split]
+  valid = data[~split]
+
+* **Number of rows in training and validation data:**  
+  * Training rows  = **112,253**  
+  * Validation rows = **48,085**
 
 
 ## Test Data
