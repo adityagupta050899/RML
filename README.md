@@ -53,6 +53,14 @@ Deployment in such contexts would require extensive retraining, domain validatio
 
    * Source of training data: Processed HMDA dataset (2023)
    * How training data was divided into training and validation data: 70% training, 30% validation
+   <pre>
+   np.random.seed(SEED)
+   split_ratio = 0.7 
+   split = np.random.rand(len(data)) < split_ratio
+   train = data[split]
+   valid = data[~split]
+   </pre>
+   
    * **Number of rows in training and validation data:**  
      * Training rows  = **112,253**  
      * Validation rows = **48,085**
@@ -71,7 +79,6 @@ Deployment in such contexts would require extensive retraining, domain validatio
    * Version of the modeling software: 0.22.2.post1
    * Hyper‑parameters / settings  
 <pre>
-  ```python
   rem_params = {
       'max_bins': 1024,
       'interactions': 10,
