@@ -48,6 +48,43 @@
    * Version of the modeling software: 0.22.2.post1
    * Hyperparameters or other settings of your model : ['loan_amount_std', 'no_intro_rate_period_std', 'term_360', 'income_std', 'debt_to_income_ratio_missing', 'intro_rate_period_std', 'property_value_std']
 
+## Assignment-wise Results Summary
+
+#### Assignment 1: Model Training on Explainable Models
+   * Objective: Train and compare GLM, Monotonic XGBoost, and EBM models on HMDA data
+   * Key Models: GLM, XGBoost (monotonic), EBM
+   * Train AUCs: GLM - 0.7652 | XGBoost - 0.80008 | EBM - 0.8314
+   * Validation AUCs: GLM - 0.7538 | XGBoost - 0.7916 | EBM - 0.8250
+   * Observations: EBM achieved the best performance among explainable models. GLM served as baseline.
+
+#### Assignment 2: Model Explanation and Feature Importance
+   * Objective: Use global/local importance and partial dependence to compare model behaviors
+   * Approach: Extract SHAP values, regression coefficients, and EBM scores
+   * Visuals: Global bar plots, PDPs for key variables, local explanations at 10th/50th/90th percentiles
+   * Observations: Models showed consistent directionality on top features, but differed in strength and interaction detection
+
+#### Assignment 3: Fairness Testing and Remediation (AIR)
+   * Objective: Test models for discrimination using AIR; improve without reducing AIR below 0.8
+   * Initial EBM AIRs: Black vs White - 0.843 | Asian vs White - 1.109 | Female vs Male - 0.999
+   * Remediated EBM AIRs: Black vs White - 0.943 | Asian vs White - 1.159 | Female vs Male - 1.021
+   * Validation AUC: 0.8250 (no performance drop from original EBM)
+   * Observations: Grid search helped improve fairness while retaining model performance
+
+#### Assignment 4: Red Teaming and Adversarial Testing
+   * Objective: Simulate adversarial attacks on model via model extraction and counterexamples
+   * Methods: Decision tree model extraction, adversarial input generation, attack simulation
+   * Outcomes: Exposed model vulnerabilities to feature flipping and response skew
+   * Observations: EBM showed resilience to mild attacks but lacked protection against well-crafted inputs
+
+#### Assignment 5: Debugging and Robustness (Final Remediated EBM)
+   * Objective: Stress test EBM under recession and improve residual error patterns
+   * Stress Test Result: AUC degraded under recession conditions
+   * Residual Fixes: Outlier removal and reweighting improved stability
+   * Final AUCs: Train - 0.7984 | Validation - 0.8005 | True Test - 0.7801
+   * Final AIRs: Black vs White - 0.981 | Asian vs White - 1.110 | Female vs Male - 1.008
+   * Observations: Final model achieved optimal tradeoff between fairness and performance
+
+
 ## Quantitative Analysis
 Models were assessed primarily with AUC and AIR. See details below:
 
